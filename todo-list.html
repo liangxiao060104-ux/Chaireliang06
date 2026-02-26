@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的待办清单</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面基础样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 容器样式 - 居中显示，最大宽度500px */
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 24px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        /* 页面标题样式 */
+        h1 {
+            text-align: center;
+            color: #0071e3; /* 苹果风格的蓝色 */
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* 输入区域样式 */
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* 输入框样式 */
+        .input-section input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        /* 输入框聚焦效果 */
+        .input-section input:focus {
+            border-color: #0071e3;
+        }
+
+        /* 添加按钮样式 */
+        .input-section button {
+            padding: 14px 24px;
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* 添加按钮悬停效果 */
+        .input-section button:hover {
+            background-color: #0066cc;
+        }
+
+        /* 任务列表样式 */
+        .task-list {
+            list-style: none;
+        }
+
+        /* 单个任务项样式 */
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            transition: background-color 0.2s;
+        }
+
+        /* 任务项悬停效果 */
+        .task-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* 任务内容样式 */
+        .task-content {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        /* 任务按钮容器样式 */
+        .task-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* 完成按钮样式 */
+        .complete-btn {
+            padding: 8px 16px;
+            background-color: #34c759;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* 完成按钮悬停效果 */
+        .complete-btn:hover {
+            background-color: #28a745;
+        }
+
+        /* 删除按钮样式 */
+        .delete-btn {
+            padding: 8px 16px;
+            background-color: #ff3b30;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* 删除按钮悬停效果 */
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* 响应式设计 - 适配手机屏幕 */
+        @media (max-width: 375px) {
+            .container {
+                margin: 20px;
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .input-section {
+                flex-direction: column;
+            }
+
+            .input-section button {
+                width: 100%;
+            }
+
+            .task-item {
+                padding: 12px;
+            }
+
+            .task-buttons {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .complete-btn, .delete-btn {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 容器 -->
+    <div class="container">
+        <!-- 页面标题 -->
+        <h1>我的待办清单</h1>
+
+        <!-- 输入区域 -->
+        <div class="input-section">
+            <input type="text" placeholder="输入新任务...">
+            <button>添加</button>
+        </div>
+
+        <!-- 任务列表 -->
+        <ul class="task-list">
+            <!-- 任务项 1 -->
+            <li class="task-item">
+                <span class="task-content">完成项目报告</span>
+                <div class="task-buttons">
+                    <button class="complete-btn">完成</button>
+                    <button class="delete-btn">删除</button>
+                </div>
+            </li>
+
+            <!-- 任务项 2 -->
+            <li class="task-item">
+                <span class="task-content">买牛奶</span>
+                <div class="task-buttons">
+                    <button class="complete-btn">完成</button>
+                    <button class="delete-btn">删除</button>
+                </div>
+            </li>
+
+            <!-- 任务项 3 -->
+            <li class="task-item">
+                <span class="task-content">给妈妈打电话</span>
+                <div class="task-buttons">
+                    <button class="complete-btn">完成</button>
+                    <button class="delete-btn">删除</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const taskInput = document.querySelector('.input-section input');
+            const addButton = document.querySelector('.input-section button');
+            const taskList = document.querySelector('.task-list');
+
+            // 为添加按钮添加点击事件监听器
+            addButton.addEventListener('click', addTask);
+
+            // 为输入框添加回车键事件监听器（可选，提升用户体验）
+            taskInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+
+            // 从localStorage加载任务
+            loadTasks();
+
+            // 为初始任务的按钮添加事件监听器
+            addTaskListeners();
+
+            // 添加任务函数
+            function addTask() {
+                // 获取输入框的值并去除首尾空格
+                const taskText = taskInput.value.trim();
+
+                // 验证输入是否为空
+                if (taskText === '') {
+                    return; // 如果为空，直接返回，不添加任务
+                }
+
+                // 创建新任务项
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task-item';
+
+                // 构建任务项的HTML结构
+                taskItem.innerHTML = `
+                    <span class="task-content">${taskText}</span>
+                    <div class="task-buttons">
+                        <button class="complete-btn">完成</button>
+                        <button class="delete-btn">删除</button>
+                    </div>
+                `;
+
+                // 将新任务添加到任务列表中
+                taskList.appendChild(taskItem);
+
+                // 清空输入框
+                taskInput.value = '';
+                
+                // 保存任务到localStorage
+                saveTasks();
+
+                // 为新任务的按钮添加事件监听器
+                const completeButton = taskItem.querySelector('.complete-btn');
+                const deleteButton = taskItem.querySelector('.delete-btn');
+                const taskContent = taskItem.querySelector('.task-content');
+
+                completeButton.addEventListener('click', function() {
+                    // 切换任务完成状态
+                    toggleTaskComplete(taskItem, completeButton, taskContent);
+                });
+
+                deleteButton.addEventListener('click', function() {
+                    // 删除任务
+                    taskList.removeChild(taskItem);
+                    
+                    // 保存任务到localStorage
+                    saveTasks();
+                });
+            }
+
+            // 为所有任务按钮添加事件监听器的函数
+            function addTaskListeners() {
+                // 获取所有任务项
+                const taskItems = document.querySelectorAll('.task-item');
+                
+                // 为每个任务项的按钮添加事件监听器
+                taskItems.forEach(function(taskItem) {
+                    // 获取当前任务项的元素
+                    const completeButton = taskItem.querySelector('.complete-btn');
+                    const deleteButton = taskItem.querySelector('.delete-btn');
+                    const taskContent = taskItem.querySelector('.task-content');
+                    
+                    // 为完成按钮添加点击事件监听器
+                    completeButton.addEventListener('click', function() {
+                        // 切换任务完成状态
+                        toggleTaskComplete(taskItem, completeButton, taskContent);
+                    });
+                    
+                    // 为删除按钮添加点击事件监听器
+                    deleteButton.addEventListener('click', function() {
+                        // 删除任务
+                        taskList.removeChild(taskItem);
+                        
+                        // 保存任务到localStorage
+                        saveTasks();
+                    });
+                });
+            }
+
+            // 切换任务完成状态的函数
+            function toggleTaskComplete(taskItem, completeButton, taskContent) {
+                // 检查任务是否已完成（通过检查是否有删除线样式）
+                const isCompleted = taskContent.style.textDecoration === 'line-through';
+                
+                if (isCompleted) {
+                    // 如果已完成，则取消完成状态
+                    taskContent.style.textDecoration = 'none';
+                    taskContent.style.color = '#333';
+                    completeButton.textContent = '完成';
+                } else {
+                    // 如果未完成，则标记为已完成
+                    taskContent.style.textDecoration = 'line-through';
+                    taskContent.style.color = '#999';
+                    completeButton.textContent = '取消';
+                }
+                
+                // 保存任务到localStorage
+                saveTasks();
+            }
+
+            // 保存任务到localStorage的函数
+            function saveTasks() {
+                const tasks = [];
+                
+                // 获取所有任务项
+                const taskItems = document.querySelectorAll('.task-item');
+                
+                // 遍历每个任务项，提取数据
+                taskItems.forEach(function(taskItem) {
+                    const taskContent = taskItem.querySelector('.task-content');
+                    const isCompleted = taskContent.style.textDecoration === 'line-through';
+                    
+                    // 创建任务对象
+                    const task = {
+                        content: taskContent.textContent,
+                        completed: isCompleted
+                    };
+                    
+                    // 添加到任务数组
+                    tasks.push(task);
+                });
+                
+                // 将任务数组转换为JSON字符串并保存到localStorage
+                localStorage.setItem('todoList', JSON.stringify(tasks));
+            }
+
+            // 从localStorage加载任务的函数
+            function loadTasks() {
+                // 从localStorage获取任务数据
+                const savedTasks = localStorage.getItem('todoList');
+                
+                // 清空当前任务列表
+                taskList.innerHTML = '';
+                
+                // 检查是否有保存的任务
+                if (savedTasks) {
+                    // 解析JSON字符串为任务数组
+                    const tasks = JSON.parse(savedTasks);
+                    
+                    // 遍历任务数组，创建任务项
+                    tasks.forEach(function(task) {
+                        // 创建新任务项
+                        const taskItem = document.createElement('li');
+                        taskItem.className = 'task-item';
+                        
+                        // 构建任务项的HTML结构
+                        taskItem.innerHTML = `
+                            <span class="task-content">${task.content}</span>
+                            <div class="task-buttons">
+                                <button class="complete-btn">${task.completed ? '取消' : '完成'}</button>
+                                <button class="delete-btn">删除</button>
+                            </div>
+                        `;
+                        
+                        // 如果任务已完成，添加完成样式
+                        if (task.completed) {
+                            const taskContent = taskItem.querySelector('.task-content');
+                            taskContent.style.textDecoration = 'line-through';
+                            taskContent.style.color = '#999';
+                        }
+                        
+                        // 将任务项添加到任务列表
+                        taskList.appendChild(taskItem);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

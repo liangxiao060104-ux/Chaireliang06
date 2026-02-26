@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动漫收藏 - 动漫小窝</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 字体设置 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* 色彩方案 */
+        :root {
+            --primary-color: #FFD1DC; /* 淡粉色 */
+            --secondary-color: #E0F2F1; /* 薄荷绿 */
+            --accent-color: #B3E5FC; /* 淡蓝色 */
+            --light-color: #FFFFFF; /* 白色 */
+            --gray-color: #F5F5F5; /* 浅灰色 */
+            --text-color: #333333; /* 文字颜色 */
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "🌸";
+            margin-right: 10px;
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            background-color: var(--gray-color);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 筛选区域 */
+        .filter-section {
+            background-color: var(--light-color);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .filter-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .filter-group select {
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            background-color: var(--light-color);
+        }
+
+        /* 动漫收藏网格 */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .collection-card {
+            background-color: var(--light-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .collection-card-content {
+            padding: 20px;
+        }
+
+        .collection-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .collection-card .info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .collection-card .rating {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .collection-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .collection-card .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--light-color);
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-section p,
+        .footer-section li {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .filter-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-section {
+                padding: 15px;
+            }
+
+            .collection-card-content {
+                padding: 15px;
+            }
+        }
+    </style>
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">动漫小窝</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我</a></li>
+                    <li><a href="collection.html">动漫收藏</a></li>
+                    <li><a href="merchandise.html">手办周边</a></li>
+                    <li><a href="blog.html">动漫博客</a></li>
+                    <li><a href="contact.html">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 动漫收藏页面 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">动漫收藏</h2>
+            
+            <!-- 筛选区域 -->
+            <div class="filter-section">
+                <div class="filter-content">
+                    <div class="filter-group">
+                        <label for="genre">类型：</label>
+                        <select id="genre">
+                            <option value="all">全部</option>
+                            <option value="治愈">治愈</option>
+                            <option value="校园">校园</option>
+                            <option value="魔法少女">魔法少女</option>
+                            <option value="热血">热血</option>
+                            <option value="恋爱">恋爱</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="year">年份：</label>
+                        <select id="year">
+                            <option value="all">全部</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="rating">评分：</label>
+                        <select id="rating">
+                            <option value="all">全部</option>
+                            <option value="5">5星</option>
+                            <option value="4">4星以上</option>
+                            <option value="3">3星以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 动漫收藏网格 -->
+            <div class="collection-grid">
+                <!-- 动漫卡片 1 -->
+                <div class="collection-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20girl%20with%20pink%20hair%20in%20school%20uniform%2C%20cute%2C%20colorful%2C%20anime%20style&image_size=landscape_4_3" alt="青春猪头少年不会梦到兔女郎学姐">
+                    <div class="collection-card-content">
+                        <h3>青春猪头少年不会梦到兔女郎学姐</h3>
+                        <div class="info">
+                            <span>类型：校园、奇幻</span>
+                            <span>年份：2018</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="margin-left: 5px; color: #666;">4.5</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">校园</span>
+                            <span class="tag">奇幻</span>
+                            <span class="tag">青春</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 动漫卡片 2 -->
+                <div class="collection-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20magical%20girl%20with%20blue%20hair%2C%20sparkling%20wands%2C%20colorful%20background%2C%20anime%20style&image_size=landscape_4_3" alt="魔法少女小圆">
+                    <div class="collection-card-content">
+                        <h3>魔法少女小圆</h3>
+                        <div class="info">
+                            <span>类型：魔法少女、黑暗</span>
+                            <span>年份：2011</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="margin-left: 5px; color: #666;">5.0</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">魔法少女</span>
+                            <span class="tag">黑暗</span>
+                            <span class="tag">哲学</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 动漫卡片 3 -->
+                <div class="collection-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20school%20life%20with%20friends%2C%20sunny%20day%2C%20happy%20atmosphere%2C%20anime%20style&image_size=landscape_4_3" alt="轻音少女">
+                    <div class="collection-card-content">
+                        <h3>轻音少女</h3>
+                        <div class="info">
+                            <span>类型：校园、音乐</span>
+                            <span>年份：2009</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span style="margin-left: 5px; color: #666;">4.0</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">校园</span>
+                            <span class="tag">音乐</span>
+                            <span class="tag">治愈</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 动漫卡片 4 -->
+                <div class="collection-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20girls%20in%20maid%20costumes%2C%20cute%2C%20colorful%20cafe%20setting%2C%20anime%20style&image_size=landscape_4_3" alt="请问您今天要来点兔子吗？">
+                    <div class="collection-card-content">
+                        <h3>请问您今天要来点兔子吗？</h3>
+                        <div class="info">
+                            <span>类型：治愈、日常</span>
+                            <span>年份：2014</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="margin-left: 5px; color: #666;">4.5</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">治愈</span>
+                            <span class="tag">日常</span>
+                            <span class="tag">可爱</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 动漫卡片 5 -->
+                <div class="collection-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20high%20school%20romance%2C%20cute%20couple%2C%20sunset%20background%2C%20anime%20style&image_size=landscape_4_3" alt="堀与宫村">
+                    <div class="collection-card-content">
+                        <h3>堀与宫村</h3>
+                        <div class="info">
+                            <span>类型：校园、恋爱</span>
+                            <span>年份：2021</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span style="margin-left: 5px; color: #666;">4.0</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">校园</span>
+                            <span class="tag">恋爱</span>
+                            <span class="tag">青春</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 动漫卡片 6 -->
+                <div class="collection-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20magical%20girl%20transformation%2C%20colorful%20costume%2C%20sparkles%2C%20anime%20style&image_size=landscape_4_3" alt="美少女战士">
+                    <div class="collection-card-content">
+                        <h3>美少女战士</h3>
+                        <div class="info">
+                            <span>类型：魔法少女、热血</span>
+                            <span>年份：1992</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="margin-left: 5px; color: #666;">5.0</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">魔法少女</span>
+                            <span class="tag">热血</span>
+                            <span class="tag">经典</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>动漫小窝</h3>
+                    <p>一个属于动漫爱好者的温馨空间，分享喜欢的动漫、手办和周边，记录动漫带给我们的快乐时光。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-bilibili"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="collection.html">动漫收藏</a></li>
+                        <li><a href="merchandise.html">手办周边</a></li>
+                        <li><a href="blog.html">动漫博客</a></li>
+                        <li><a href="contact.html">联系我</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我</h3>
+                    <p>邮箱：anime@example.com</p>
+                    <p>微博：@动漫小窝</p>
+                    <p>B站：动漫小窝</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 动漫小窝. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动漫博客 - 动漫小窝</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 字体设置 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* 色彩方案 */
+        :root {
+            --primary-color: #FFD1DC; /* 淡粉色 */
+            --secondary-color: #E0F2F1; /* 薄荷绿 */
+            --accent-color: #B3E5FC; /* 淡蓝色 */
+            --light-color: #FFFFFF; /* 白色 */
+            --gray-color: #F5F5F5; /* 浅灰色 */
+            --text-color: #333333; /* 文字颜色 */
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "🌸";
+            margin-right: 10px;
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            background-color: var(--gray-color);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 博客内容 */
+        .blog-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* 博客文章列表 */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .blog-post {
+            background-color: var(--light-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-post-content {
+            padding: 20px;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .blog-post h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .blog-post p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blog-post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .blog-post-tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #ffb3c1;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-section {
+            background-color: var(--light-color);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .sidebar-section h4::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin-top: 8px;
+            border-radius: 1.5px;
+        }
+
+        /* 热门标签 */
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* 最新文章 */
+        .recent-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .recent-post-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .recent-post-item img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .recent-post-info h5 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .recent-post-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--light-color);
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-section p,
+        .footer-section li {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .blog-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post-content {
+                padding: 15px;
+            }
+
+            .sidebar-section {
+                padding: 15px;
+            }
+        }
+    </style>
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">动漫小窝</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我</a></li>
+                    <li><a href="collection.html">动漫收藏</a></li>
+                    <li><a href="merchandise.html">手办周边</a></li>
+                    <li><a href="blog.html">动漫博客</a></li>
+                    <li><a href="contact.html">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 动漫博客页面 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">动漫博客</h2>
+            
+            <div class="blog-content">
+                <!-- 博客文章列表 -->
+                <div class="blog-posts">
+                    <!-- 博客文章 1 -->
+                    <div class="blog-post">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20spring%20season%202024%2C%20colorful%20anime%20characters%2C%20new%20anime%20season%2C%20anime%20style&image_size=landscape_4_3" alt="2024年春季新番推荐">
+                        <div class="blog-post-content">
+                            <div class="blog-post-meta">
+                                <span><i class="far fa-calendar-alt"></i> 2024-04-01</span>
+                                <span><i class="far fa-user"></i> 小樱</span>
+                                <span><i class="far fa-eye"></i> 1234</span>
+                            </div>
+                            <h3>2024年春季新番推荐：不容错过的精彩作品</h3>
+                            <p>2024年春季新番已经开始播出，本季度有许多值得关注的作品。从热血战斗到温馨治愈，各种类型应有尽有。本文将为大家推荐几部必看的春季新番，包括制作精良的续作和令人期待的原创作品。</p>
+                            <div class="blog-post-tags">
+                                <span class="blog-post-tag">新番推荐</span>
+                                <span class="blog-post-tag">2024春季</span>
+                                <span class="blog-post-tag">动漫推荐</span>
+                            </div>
+                            <a href="#" class="read-more">阅读更多</a>
+                        </div>
+                    </div>
+                    
+                    <!-- 博客文章 2 -->
+                    <div class="blog-post">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20convention%20cosplay%2C%20colorful%20costumes%2C%20anime%20fans%2C%20anime%20style&image_size=landscape_4_3" alt="漫展经历">
+                        <div class="blog-post-content">
+                            <div class="blog-post-meta">
+                                <span><i class="far fa-calendar-alt"></i> 2024-03-15</span>
+                                <span><i class="far fa-user"></i> 小樱</span>
+                                <span><i class="far fa-eye"></i> 987</span>
+                            </div>
+                            <h3>2024年动漫展见闻：精彩的cosplay和同人作品</h3>
+                            <p>最近我参加了2024年的动漫展，现场人山人海，充满了动漫的氛围。本文将分享我的漫展经历，包括精彩的cosplay表演、精美的同人作品，以及我在展会上的收获和感受。</p>
+                            <div class="blog-post-tags">
+                                <span class="blog-post-tag">漫展</span>
+                                <span class="blog-post-tag">cosplay</span>
+                                <span class="blog-post-tag">同人作品</span>
+                            </div>
+                            <a href="#" class="read-more">阅读更多</a>
+                        </div>
+                    </div>
+                    
+                    <!-- 博客文章 3 -->
+                    <div class="blog-post">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20figure%20collection%2C%20detailed%20figures%2C%20display%20shelf%2C%20anime%20style&image_size=landscape_4_3" alt="手办收藏心得">
+                        <div class="blog-post-content">
+                            <div class="blog-post-meta">
+                                <span><i class="far fa-calendar-alt"></i> 2024-03-01</span>
+                                <span><i class="far fa-user"></i> 小樱</span>
+                                <span><i class="far fa-eye"></i> 1567</span>
+                            </div>
+                            <h3>手办收藏心得：如何开始你的手办收藏之旅</h3>
+                            <p>手办收藏是许多动漫爱好者的爱好之一，但对于新手来说，如何开始收藏手办可能会有些迷茫。本文将分享我的手办收藏心得，包括如何选择适合自己的手办、如何辨别手办的质量、以及如何保养和展示手办。</p>
+                            <div class="blog-post-tags">
+                                <span class="blog-post-tag">手办</span>
+                                <span class="blog-post-tag">收藏</span>
+                                <span class="blog-post-tag">心得</span>
+                            </div>
+                            <a href="#" class="read-more">阅读更多</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 侧边栏 -->
+                <div class="sidebar">
+                    <!-- 热门标签 -->
+                    <div class="sidebar-section">
+                        <h4>热门标签</h4>
+                        <div class="tags-cloud">
+                            <a href="#" class="tag">新番推荐</a>
+                            <a href="#" class="tag">手办</a>
+                            <a href="#" class="tag">漫展</a>
+                            <a href="#" class="tag">cosplay</a>
+                            <a href="#" class="tag">动漫推荐</a>
+                            <a href="#" class="tag">收藏</a>
+                            <a href="#" class="tag">心得</a>
+                            <a href="#" class="tag">同人作品</a>
+                            <a href="#" class="tag">2024春季</a>
+                            <a href="#" class="tag">治愈系</a>
+                        </div>
+                    </div>
+                    
+                    <!-- 最新文章 -->
+                    <div class="sidebar-section">
+                        <h4>最新文章</h4>
+                        <div class="recent-posts">
+                            <div class="recent-post-item">
+                                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20spring%20season%202024%2C%20colorful%20anime%20characters%2C%20new%20anime%20season%2C%20anime%20style&image_size=landscape_4_3" alt="2024年春季新番推荐">
+                                <div class="recent-post-info">
+                                    <h5>2024年春季新番推荐：不容错过的精彩作品</h5>
+                                    <p>2024-04-01</p>
+                                </div>
+                            </div>
+                            <div class="recent-post-item">
+                                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20convention%20cosplay%2C%20colorful%20costumes%2C%20anime%20fans%2C%20anime%20style&image_size=landscape_4_3" alt="漫展经历">
+                                <div class="recent-post-info">
+                                    <h5>2024年动漫展见闻：精彩的cosplay和同人作品</h5>
+                                    <p>2024-03-15</p>
+                                </div>
+                            </div>
+                            <div class="recent-post-item">
+                                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20figure%20collection%2C%20detailed%20figures%2C%20display%20shelf%2C%20anime%20style&image_size=landscape_4_3" alt="手办收藏心得">
+                                <div class="recent-post-info">
+                                    <h5>手办收藏心得：如何开始你的手办收藏之旅</h5>
+                                    <p>2024-03-01</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>动漫小窝</h3>
+                    <p>一个属于动漫爱好者的温馨空间，分享喜欢的动漫、手办和周边，记录动漫带给我们的快乐时光。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-bilibili"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="collection.html">动漫收藏</a></li>
+                        <li><a href="merchandise.html">手办周边</a></li>
+                        <li><a href="blog.html">动漫博客</a></li>
+                        <li><a href="contact.html">联系我</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我</h3>
+                    <p>邮箱：anime@example.com</p>
+                    <p>微博：@动漫小窝</p>
+                    <p>B站：动漫小窝</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 动漫小窝. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

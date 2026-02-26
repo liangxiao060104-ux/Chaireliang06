@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手办周边 - 动漫小窝</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 字体设置 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* 色彩方案 */
+        :root {
+            --primary-color: #FFD1DC; /* 淡粉色 */
+            --secondary-color: #E0F2F1; /* 薄荷绿 */
+            --accent-color: #B3E5FC; /* 淡蓝色 */
+            --light-color: #FFFFFF; /* 白色 */
+            --gray-color: #F5F5F5; /* 浅灰色 */
+            --text-color: #333333; /* 文字颜色 */
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "🌸";
+            margin-right: 10px;
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            background-color: var(--gray-color);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 手办周边网格 */
+        .merchandise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .merchandise-card {
+            background-color: var(--light-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .merchandise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .merchandise-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .merchandise-card-content {
+            padding: 20px;
+        }
+
+        .merchandise-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .merchandise-card .info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .merchandise-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .merchandise-card .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .merchandise-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .merchandise-card .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        /* 展示区域 */
+        .showcase {
+            margin-top: 60px;
+        }
+
+        .showcase-content {
+            background-color: var(--light-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .showcase-item {
+            text-align: center;
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .showcase-item h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .showcase-item p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--light-color);
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-section p,
+        .footer-section li {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .merchandise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-content {
+                padding: 30px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .merchandise-card-content {
+                padding: 15px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">动漫小窝</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">关于我</a></li>
+                    <li><a href="collection.html">动漫收藏</a></li>
+                    <li><a href="merchandise.html">手办周边</a></li>
+                    <li><a href="blog.html">动漫博客</a></li>
+                    <li><a href="contact.html">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 手办周边页面 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">手办周边</h2>
+            
+            <!-- 手办周边网格 -->
+            <div class="merchandise-grid">
+                <!-- 手办卡片 1 -->
+                <div class="merchandise-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20figure%20of%20cute%20girl%20in%20school%20uniform%2C%20high%20quality%2C%20detailed%2C%20anime%20style&image_size=landscape_4_3" alt="樱岛麻衣手办">
+                    <div class="merchandise-card-content">
+                        <h3>樱岛麻衣 兔女郎学姐手办</h3>
+                        <div class="info">
+                            <span>品牌：Aniplex</span>
+                            <span>尺寸：1/7比例</span>
+                        </div>
+                        <p>这款樱岛麻衣手办完美还原了动漫中的兔女郎造型，细节精致，色彩鲜艳，是收藏的不二之选。</p>
+                        <div class="price">¥899</div>
+                        <div class="tags">
+                            <span class="tag">手办</span>
+                            <span class="tag">樱岛麻衣</span>
+                            <span class="tag">青春猪头少年</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手办卡片 2 -->
+                <div class="merchandise-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20magical%20girl%20figure%2C%20colorful%20costume%2C%20sparkling%20wand%2C%20high%20quality%2C%20anime%20style&image_size=landscape_4_3" alt="鹿目圆手办">
+                    <div class="merchandise-card-content">
+                        <h3>鹿目圆 魔法少女手办</h3>
+                        <div class="info">
+                            <span>品牌：Good Smile Company</span>
+                            <span>尺寸：1/8比例</span>
+                        </div>
+                        <p>魔法少女小圆的经典造型手办，做工精细，涂装精美，展现了小圆变身魔法少女的神圣时刻。</p>
+                        <div class="price">¥799</div>
+                        <div class="tags">
+                            <span class="tag">手办</span>
+                            <span class="tag">鹿目圆</span>
+                            <span class="tag">魔法少女小圆</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手办卡片 3 -->
+                <div class="merchandise-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20chibi%20figures%20set%2C%20cute%20characters%2C%20colorful%2C%20anime%20style&image_size=landscape_4_3" alt="轻音少女Q版手办">
+                    <div class="merchandise-card-content">
+                        <h3>轻音少女 Q版手办套装</h3>
+                        <div class="info">
+                            <span>品牌：Banpresto</span>
+                            <span>尺寸：Q版</span>
+                        </div>
+                        <p>轻音少女五位成员的Q版手办套装，造型可爱，做工精致，是轻音粉丝的必备收藏。</p>
+                        <div class="price">¥499</div>
+                        <div class="tags">
+                            <span class="tag">手办</span>
+                            <span class="tag">轻音少女</span>
+                            <span class="tag">Q版</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手办卡片 4 -->
+                <div class="merchandise-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20poster%20wall%20art%2C%20colorful%20anime%20characters%2C%20high%20quality%2C%20anime%20style&image_size=landscape_4_3" alt="动漫海报">
+                    <div class="merchandise-card-content">
+                        <h3>动漫海报套装</h3>
+                        <div class="info">
+                            <span>品牌：Anime Poster</span>
+                            <span>尺寸：A3</span>
+                        </div>
+                        <p>精选多部热门动漫的高质量海报，采用优质纸张印刷，色彩鲜艳，适合装饰房间。</p>
+                        <div class="price">¥129</div>
+                        <div class="tags">
+                            <span class="tag">周边</span>
+                            <span class="tag">海报</span>
+                            <span class="tag">装饰</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手办卡片 5 -->
+                <div class="merchandise-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20badges%20collection%2C%20colorful%20character%20badges%2C%20anime%20style&image_size=landscape_4_3" alt="动漫徽章">
+                    <div class="merchandise-card-content">
+                        <h3>动漫徽章套装</h3>
+                        <div class="info">
+                            <span>品牌：Anime Badge</span>
+                            <span>数量：10枚</span>
+                        </div>
+                        <p>包含10枚不同动漫角色的徽章，采用优质金属材质，色彩鲜艳，适合别在书包或衣服上。</p>
+                        <div class="price">¥89</div>
+                        <div class="tags">
+                            <span class="tag">周边</span>
+                            <span class="tag">徽章</span>
+                            <span class="tag">收藏</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手办卡片 6 -->
+                <div class="merchandise-card">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20acrylic%20stands%20collection%2C%20colorful%20character%20stands%2C%20anime%20style&image_size=landscape_4_3" alt="亚克力立牌">
+                    <div class="merchandise-card-content">
+                        <h3>亚克力立牌</h3>
+                        <div class="info">
+                            <span>品牌：Acrylic Stand</span>
+                            <span>尺寸：15cm</span>
+                        </div>
+                        <p>透明亚克力材质的动漫角色立牌，色彩鲜艳，细节清晰，适合放在书桌或办公桌上。</p>
+                        <div class="price">¥69</div>
+                        <div class="tags">
+                            <span class="tag">周边</span>
+                            <span class="tag">立牌</span>
+                            <span class="tag">装饰</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 展示区域 -->
+            <div class="showcase">
+                <h3 class="section-title">收藏展示</h3>
+                <div class="showcase-content">
+                    <p style="text-align: center; margin-bottom: 30px; color: #666;">这是我的手办收藏展示，精心布置的展示柜，展示了我最喜欢的动漫角色手办。</p>
+                    <div class="showcase-grid">
+                        <div class="showcase-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20figure%20display%20shelf%2C%20multiple%20figures%2C%20neatly%20arranged%2C%20anime%20style&image_size=landscape_4_3" alt="手办展示柜">
+                            <h4>手办展示柜</h4>
+                            <p>精心布置的手办展示柜，展示了各种动漫角色手办</p>
+                        </div>
+                        <div class="showcase-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20merchandise%20collection%2C%20posters%20and%20badges%2C%20colorful%2C%20anime%20style&image_size=landscape_4_3" alt="周边收藏">
+                            <h4>周边收藏</h4>
+                            <p>收集的各种动漫周边，包括海报、徽章和卡片</p>
+                        </div>
+                        <div class="showcase-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20figure%20close%20up%2C%20detailed%20paint%2C%20high%20quality%2C%20anime%20style&image_size=landscape_4_3" alt="手办细节">
+                            <h4>手办细节</h4>
+                            <p>手办的精细细节，展现了制作工艺的精湛</p>
+                        </div>
+                        <div class="showcase-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=anime%20room%20decoration%2C%20anime%20posters%20and%20figures%2C%20colorful%2C%20anime%20style&image_size=landscape_4_3" alt="动漫房间">
+                            <h4>动漫房间</h4>
+                            <p>充满动漫元素的房间，展现了对动漫的热爱</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>动漫小窝</h3>
+                    <p>一个属于动漫爱好者的温馨空间，分享喜欢的动漫、手办和周边，记录动漫带给我们的快乐时光。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-bilibili"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="collection.html">动漫收藏</a></li>
+                        <li><a href="merchandise.html">手办周边</a></li>
+                        <li><a href="blog.html">动漫博客</a></li>
+                        <li><a href="contact.html">联系我</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我</h3>
+                    <p>邮箱：anime@example.com</p>
+                    <p>微博：@动漫小窝</p>
+                    <p>B站：动漫小窝</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 动漫小窝. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
