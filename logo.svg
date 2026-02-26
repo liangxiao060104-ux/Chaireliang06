@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="houseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFB6C1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF69B4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF69B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF1493;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 房子主体 -->
+  <path d="M10 35 L25 20 L40 35 L40 50 L10 50 Z" fill="url(#houseGradient)" stroke="#FF69B4" stroke-width="1.5"/>
+  
+  <!-- 房顶 -->
+  <path d="M8 35 L25 18 L42 35" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- 门 -->
+  <rect x="20" y="40" width="10" height="10" rx="1" fill="#FFF" stroke="#FF69B4" stroke-width="1"/>
+  
+  <!-- 窗户 -->
+  <circle cx="15" cy="42" r="3" fill="#FFF" stroke="#FF69B4" stroke-width="1"/>
+  <circle cx="35" cy="42" r="3" fill="#FFF" stroke="#FF69B4" stroke-width="1"/>
+  
+  <!-- 爱心装饰 -->
+  <path d="M25 8 C25 8 22 5 19 8 C16 11 19 14 25 18 C31 14 34 11 31 8 C28 5 25 8 25 8" fill="url(#heartGradient)"/>
+  
+  <!-- 星星装饰 -->
+  <circle cx="5" cy="25" r="1.5" fill="#98D8C8"/>
+  <circle cx="45" cy="25" r="1.5" fill="#98D8C8"/>
+  <circle cx="8" cy="15" r="1" fill="#87CEEB"/>
+  <circle cx="42" cy="15" r="1" fill="#87CEEB"/>
+  
+  <!-- 文字部分 -->
+  <text x="55" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="600" fill="#FF69B4">动漫小窝</text>
+  
+  <!-- 下划线装饰 -->
+  <line x1="55" y1="45" x2="185" y2="45" stroke="url(#houseGradient)" stroke-width="2" stroke-linecap="round"/>
+</svg>

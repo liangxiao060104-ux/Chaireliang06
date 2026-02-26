@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动漫小窝 - 个人动漫爱好者网站</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         /* 全局样式重置 */
         * {
@@ -62,8 +63,9 @@
             align-items: center;
         }
 
-        .logo::before {
-            content: "🌸";
+        .logo img {
+            height: 40px;
+            width: auto;
             margin-right: 10px;
         }
 
@@ -394,7 +396,10 @@
     <!-- 头部 -->
     <header>
         <div class="container header-content">
-            <a href="index.html" class="logo">动漫小窝</a>
+            <a href="index.html" class="logo">
+                <img src="logo.svg" alt="动漫小窝">
+                动漫小窝
+            </a>
             <nav>
                 <ul>
                     <li><a href="index.html">首页</a></li>
