@@ -197,6 +197,17 @@
             align-items: center;
             padding: 20px 0;
             border-bottom: 1px solid #e0e0e0;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .update-item:hover {
+            transform: translateX(10px);
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
         .update-item:last-child {
@@ -480,27 +491,27 @@
         <div class="container">
             <h2 class="section-title">最近更新</h2>
             <div class="updates">
-                <div class="update-item">
+                <a href="new-anime.html" class="update-item">
                     <div class="update-icon">📺</div>
                     <div class="update-content">
                         <h4>新番推荐：2024年春季新番</h4>
                         <p>2024年春季新番已经开始播出，来看看有哪些值得关注的作品吧！</p>
                     </div>
-                </div>
-                <div class="update-item">
+                </a>
+                <a href="convention.html" class="update-item">
                     <div class="update-icon">🎮</div>
                     <div class="update-content">
                         <h4>漫展经历：2024年动漫展</h4>
                         <p>分享我在最近动漫展上的见闻和收获，还有很多可爱的cosplay照片哦！</p>
                     </div>
-                </div>
-                <div class="update-item">
+                </a>
+                <a href="figure-collection.html" class="update-item">
                     <div class="update-icon">🧸</div>
                     <div class="update-content">
                         <h4>手办收藏：新入手的可爱手办</h4>
                         <p>最近入手了几个新的手办，来看看它们的细节和摆放效果吧！</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>

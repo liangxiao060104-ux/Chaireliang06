@@ -4,7 +4,14 @@
       "Bash(git init:*)",
       "Bash(git config:*)",
       "Bash(git remote:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git:*)",
+      "Bash(gh run:*)",
+      "WebSearch",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_install",
+      "Bash(curl:*)"
     ]
   }
 }

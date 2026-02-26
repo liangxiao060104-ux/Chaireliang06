@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漫展经历 - 2024年动漫展 | 动漫小窝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        :root {
+            --primary-color: #FFD1DC;
+            --secondary-color: #E0F2F1;
+            --accent-color: #B3E5FC;
+            --light-color: #FFFFFF;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+        .logo::before {
+            content: "🌸";
+            margin-right: 10px;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        .back-link {
+            display: inline-block;
+            margin: 30px 0 20px;
+            color: #666;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+        .article {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .article h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .article-meta {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .article-content {
+            line-height: 1.8;
+            color: #555;
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .photo-placeholder {
+            background: var(--secondary-color);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #888;
+        }
+        .highlight {
+            background: var(--accent-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .highlight h3 {
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: var(--light-color);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">动漫小窝</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="collection.html">收藏</a></li>
+                        <li><a href="blog.html">博客</a></li>
+                        <li><a href="contact.html">联系</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+
+        <article class="article">
+            <h1>🎮 漫展经历：2024年动漫展</h1>
+            <div class="article-meta">发布时间：2024年5月 | 分类：漫展分享</div>
+
+            <div class="article-content">
+                <p>这次漫展真的超级开心！遇到了很多同好，也看到了很多精彩的表演和cosplay～</p>
+
+                <div class="highlight">
+                    <h3>🎪 展会亮点</h3>
+                    <ul>
+                        <li>超人气coser现场表演</li>
+                        <li>各大厂商最新周边首发</li>
+                        <li>声优见面会</li>
+                        <li>动漫歌曲live演出</li>
+                    </ul>
+                </div>
+
+                <h3>📸 现场照片</h3>
+                <div class="photo-grid">
+                    <div class="photo-placeholder">cosplay照片1</div>
+                    <div class="photo-placeholder">cosplay照片2</div>
+                    <div class="photo-placeholder">cosplay照片3</div>
+                    <div class="photo-placeholder">周边展位照片</div>
+                </div>
+
+                <div class="highlight">
+                    <h3>🛍️ 收获满满</h3>
+                    <p>买到了限定版手办、海报、还有超可爱的动漫周边！</p>
+                </div>
+
+                <h3>💬 小结</h3>
+                <p>这次漫展真的是太棒了！认识了很多志同道合的朋友，期待下一次的漫展再见～</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>© 2024 动漫小窝 - 让热爱持续发光</p>
+    </footer>
+</body>
+</html>
